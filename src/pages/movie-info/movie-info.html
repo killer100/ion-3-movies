@@ -1,0 +1,52 @@
+<!--
+  Generated template for the MovieInfoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>{{movie.title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding [style.background-image]="'url(' + movie.backdropUrl + ')'" class="content-info">
+  <ion-grid [hidden]="movie.id" class="grid-loader">
+    <ion-row>
+      <ion-col text-center>
+        <ion-spinner></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <section [hidden]="!movie.id">
+
+    <img [defaultImage]="imageDefaultUrl" [lazyLoad]="movie.backdropUrl" [offset]="100" [errorImage]="imageErrorUrl" class="img-backdrop">
+
+    <ion-grid class="grid-info">
+      <ion-row>
+        <ion-col col-12>
+          <h3>{{movie.title}}</h3>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>
+          <img [defaultImage]="imageDefaultUrl" [lazyLoad]="movie.posterUrl" [offset]="100" [errorImage]="imageErrorUrl" class="img-backdrop">
+        </ion-col>
+        <ion-col col-8>
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <p no-padding no-margin text-justify>{{movie.overview}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </section>
+
+</ion-content>

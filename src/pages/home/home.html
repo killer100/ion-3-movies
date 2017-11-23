@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Busca tus películas</ion-title>
+  </ion-navbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar (ionInput)="searchMovie($event)" [animated]="true" placeholder="Ingresa un nombre" debounce="500" showCancelButton="true"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding #container class="feed-background">
+
+
+  <ion-grid [hidden]="movieList.length!=0" class="grid-empty-background">
+    <ion-row>
+      <ion-col text-center>
+        <ion-spinner [hidden]="!this.flags.isLoadingData"></ion-spinner>
+        <ion-label [hidden]="this.flags.isLoadingData||this.flags.noResultsFound">Empieza a buscar</ion-label>
+        <ion-label [hidden]="!this.flags.noResultsFound">No se encontraron resultados</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card *ngFor="let movie of movieList" [hidden]="movieList.length==0">
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="{{movie.posterUrl}}">
+      </ion-avatar>
+      <h2>{{movie.title}}</h2>
+      <p>{{movie.original_title}}</p>
+    </ion-item>
+
+    <img [defaultImage]="imageDefaultUrl" [lazyLoad]="movie.backdropUrl" [offset]="100" [scrollObservable]="container.ionScroll"
+      [errorImage]="imageErrorUrl">
+    <ion-card-content (click)="MovieInfo(movie.id)">
+      <p>{{movie.overview | truncate: 120 }}</p>
+    </ion-card-content>
+
+  </ion-card>
+
+
+
+</ion-content>
